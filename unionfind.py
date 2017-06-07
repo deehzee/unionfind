@@ -25,11 +25,11 @@ class UnionFind(object):
     union-find algorithm.  Only works if elements are immutable
     objects.
 
-    Worst case for union and find: :math: `(N + M \log* N)`, with
-    :math: `N` elements and :math: `M` unions. The function
-    :math: `\log*` is the number of times needed to take the log of
-    a number until reaching 1. In practice, the amortized cost of
-    each operation is nearly linear.
+    Worst case for union and find: :math:`(N + M \log^* N)`, with
+    :math:`N` elements and :math:`M` unions. The function
+    :math:`\log^*` is the number of times needed to take :math:`\log`
+    of a number until reaching 1. In practice, the amortized cost of
+    each operation is nearly linear [1]_.
 
     Terms
     -----
@@ -82,6 +82,8 @@ class UnionFind(object):
         ``i``-th index. If ``i`` is not a valid index an ``IndexError`` is
         raised.
 
+    .. [1] http://algs4.cs.princeton.edu/lectures/
+
     """
 
     def __init__(self, elements=None):
@@ -101,9 +103,13 @@ class UnionFind(object):
 
     def __repr__(self):
         return  (
-            '<UnionFind:\n\tpar={},\n\tsiz={},\n\telts={},\nn={}, count={}>'
+            '<UnionFind:\n\telts={},\n\tsiz={},\n\tpar={},\nn_elts={},n_comps={}>'
             .format(
-                self._par, self._siz, self._elts, self.n_elts, self.n_comps,
+                self._elts,
+                self._siz,
+                self._par,
+                self.n_elts,
+                self.n_comps,
             ))
 
     def __len__(self):
