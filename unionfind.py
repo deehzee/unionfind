@@ -9,6 +9,8 @@ from __future__ import (
 )
 
 # Third-party libraries
+from collections import defaultdict
+
 import numpy as np
 
 
@@ -258,11 +260,11 @@ class UnionFind(object):
             A list of sets.
 
         """
-        elts = np.array(self._elts)
-        vfind = np.vectorize(self.find)
-        roots = vfind(elts)
-        distinct_roots = set(roots)
-        return [set(elts[roots == root]) for root in distinct_roots]
+        dict_components = defaultdict(list)
+        for elem in self._elts:
+            root = self.find(elem)
+            dict_components[root].append(elem)
+        return dict_components
         # comps = []
         # for root in distinct_roots:
         #     mask = (roots == root)
