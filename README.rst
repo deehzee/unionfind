@@ -23,10 +23,6 @@ Contents
 
 * License: MIT.
 
-Requirements
-------------
-
-* ``numpy``
 
 
 .. [1] http://algs4.cs.princeton.edu/lectures/
