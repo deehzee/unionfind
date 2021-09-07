@@ -9,19 +9,19 @@ to the same component).
 This implements the "weighted-quick-union-with-path-compression" union-find
 algorithm.  Only works if elements are immutable objects.
 
-Worst case for union and find :math:`(N + M \log^* N)`, with :math:`N` elements
-and :math:`M` union/find operations. The function :math:`\log^*` is the number
-of times needed to take :math:`\log` (base 2) of a number until reaching 1. In
+Worst case for union and find ``(N + M log* N)``, with ``N`` elements
+and ``M`` union/find operations. The function ``log*`` is the number
+of times needed to take ``log`` (base 2) of a number until reaching 1. In
 practice, the amortized cost of each operation is nearly linear [1]_.
 
-Installation With `pip`
----------------------
+Installation With ``pip``
+-------------------------
 
-```bash
-pip install pyunionfind
-```
+.. code-block:: sh
 
-This installs a module named `unionfind`.
+        pip install pyunionfind
+
+This installs a module named ``unionfind``.
 
 
 Contents
