@@ -14,6 +14,16 @@ and :math:`M` union/find operations. The function :math:`\log^*` is the number
 of times needed to take :math:`\log` (base 2) of a number until reaching 1. In
 practice, the amortized cost of each operation is nearly linear [1]_.
 
+Installation With `pip`
+---------------------
+
+```bash
+pip install pyunionfind
+```
+
+This installs a module named `unionfind`.
+
+
 Contents
 --------
 
