@@ -8,9 +8,7 @@ from __future__ import (
     absolute_import, division, print_function, unicode_literals,
 )
 
-# Third-party libraries
-import numpy as np
-
+__all__ = ["UnionFind"]
 
 class UnionFind(object):
     """Union-find disjoint sets datastructure.
@@ -244,10 +242,8 @@ class UnionFind(object):
         """
         if x not in self:
             raise ValueError('{} is not an element'.format(x))
-        elts = np.array(self._elts)
-        vfind = np.vectorize(self.find)
-        roots = vfind(elts)
-        return set(elts[roots == self.find(x)])
+        root = self.find(x)
+        return set((elt for elt in self._elts if self.find(elt) == root))
 
     def components(self):
         """Return the list of connected components.
@@ -258,17 +254,11 @@ class UnionFind(object):
             A list of sets.
 
         """
-        elts = np.array(self._elts)
-        vfind = np.vectorize(self.find)
-        roots = vfind(elts)
-        distinct_roots = set(roots)
-        return [set(elts[roots == root]) for root in distinct_roots]
-        # comps = []
-        # for root in distinct_roots:
-        #     mask = (roots == root)
-        #     comp = set(elts[mask])
-        #     comps.append(comp)
-        # return comps
+        components_dict = {}
+        for elt in self._elts:
+            root = self.find(elt)
+            components_dict.setdefault(root, set()).add(elt)
+        return list(components_dict.values())
 
     def component_mapping(self):
         """Return a dict mapping elements to their components.
@@ -315,17 +305,11 @@ class UnionFind(object):
             A dict with the semantics: `elt -> component contianing elt`.
 
         """
-        elts = np.array(self._elts)
-        vfind = np.vectorize(self.find)
-        roots = vfind(elts)
-        distinct_roots = set(roots)
-        comps = {}
-        for root in distinct_roots:
-            mask = (roots == root)
-            comp = set(elts[mask])
-            comps.update({x: comp for x in comp})
-            # Change ^this^, if you want a different behaviour:
-            # If you don't want to share the same set to different keys:
-            # comps.update({x: set(comp) for x in comp})
-        return comps
+        components_dict = {}
+        mapping = {}
+        for elt in self._elts:
+            root = self.find(elt)
+            components_dict.setdefault(root, set()).add(elt)
+            mapping[elt] = components_dict[root]
+        return mapping
 
