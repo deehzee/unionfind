@@ -14,6 +14,10 @@ and :math:`M` union/find operations. The function :math:`\log^*` is the number
 of times needed to take :math:`\log` (base 2) of a number until reaching 1. In
 practice, the amortized cost of each operation is nearly linear [1]_.
 
+**Update:** This has now been packaged into an instalable pip package by
+Hagai Helman Tov (@hagai-helman).
+See the fork at https://github.com/hagai-helman/unionfind).
+
 Contents
 --------
 
